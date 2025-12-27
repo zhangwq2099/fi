@@ -1,154 +1,124 @@
-2025-12-27 23:27:20 [INFO    ] test_client:100 - ================================================================================
-2025-12-27 23:27:20 [INFO    ] test_client:101 - 测试开始时间: 2025-12-27 23:27:20
-2025-12-27 23:27:20 [INFO    ] test_client:102 - 日志文件: d:\work\workspace\fi\tests\test_client.log
-2025-12-27 23:27:20 [INFO    ] test_client:103 - ================================================================================
-2025-12-27 23:27:20 [INFO    ] test_client:112 - 创建 FundClient 实例
-2025-12-27 23:27:20 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
-2025-12-27 23:27:20 [INFO    ] test_client:121 - ============================================================
-2025-12-27 23:27:20 [INFO    ] test_client:122 - 开始测试: test_health_check
-2025-12-27 23:27:20 [INFO    ] test_client:123 - ============================================================
-2025-12-27 23:27:20 [INFO    ] test_client:126 - 调用 health_check()
-2025-12-27 23:27:20 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:22 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/health HTTP/1.1" 200 20
-2025-12-27 23:27:22 [INFO    ] test_client:128 - 健康检查结果: {'status': 'healthy'}
-2025-12-27 23:27:22 [INFO    ] test_client:130 - ✓ 健康检查测试通过
-2025-12-27 23:27:22 [INFO    ] test_client:112 - 创建 FundClient 实例
-2025-12-27 23:27:22 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
-2025-12-27 23:27:22 [INFO    ] test_client:137 - ============================================================
-2025-12-27 23:27:22 [INFO    ] test_client:138 - 开始测试: test_create_user
-2025-12-27 23:27:22 [INFO    ] test_client:139 - ============================================================
-2025-12-27 23:27:22 [INFO    ] test_client:142 - 创建用户: 测试用户, 320101199001011234
-2025-12-27 23:27:22 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:24 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
-2025-12-27 23:27:24 [INFO    ] client:107 - 用户创建成功: USER_b4471cb11857408f
-2025-12-27 23:27:24 [INFO    ] test_client:147 - 用户创建成功，user_id: USER_b4471cb11857408f
-2025-12-27 23:27:24 [INFO    ] test_client:151 - 获取用户信息: USER_b4471cb11857408f
-2025-12-27 23:27:24 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:26 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/users/USER_b4471cb11857408f HTTP/1.1" 200 255
-2025-12-27 23:27:26 [INFO    ] test_client:153 - 用户信息: {'user_id': 'USER_b4471cb11857408f', 'user_name': '测试用户', 'user_type': 'PERSONAL', 'user_status': 'ACTIVE', 'identity_no': '320101199001011234', 'phone': None, 'email': None, 'create_time': '2025-12-27T23:27:24.630102', 'update_time': '2025-12-27T23:27:24.630102'}
-2025-12-27 23:27:26 [INFO    ] test_client:155 - ✓ 创建用户测试通过
-2025-12-27 23:27:26 [INFO    ] test_client:112 - 创建 FundClient 实例
-2025-12-27 23:27:26 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
-2025-12-27 23:27:26 [INFO    ] test_client:162 - ============================================================
-2025-12-27 23:27:26 [INFO    ] test_client:163 - 开始测试: test_open_fund_account
-2025-12-27 23:27:26 [INFO    ] test_client:164 - ============================================================
-2025-12-27 23:27:26 [INFO    ] test_client:168 - 步骤 1: 创建用户
-2025-12-27 23:27:26 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:28 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
-2025-12-27 23:27:28 [INFO    ] client:107 - 用户创建成功: USER_91477dbf32c7472b
-2025-12-27 23:27:28 [INFO    ] test_client:173 - 用户创建成功，user_id: USER_91477dbf32c7472b
-2025-12-27 23:27:28 [INFO    ] test_client:176 - 步骤 2: 开通基金账户，user_id: USER_91477dbf32c7472b
-2025-12-27 23:27:28 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:30 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 400 77
-2025-12-27 23:27:30 [ERROR   ] client:84 - 处理响应失败: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_91477dbf32c7472b
-2025-12-27 23:27:30 [ERROR   ] test_client:182 - ✗ 开通基金账户测试失败: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_91477dbf32c7472b
-Traceback (most recent call last):
-  File "d:\work\workspace\fi\tests\test_client.py", line 177, in test_open_fund_account
-    account_id = client.open_fund_account(user_id)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 139, in open_fund_account
-    result = self._request("POST", "/api/v1/accounts/open", json=data)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 78, in _request
-    raise Exception(f"HTTP错误 {response.status_code}: {error_detail}")
-Exception: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_91477dbf32c7472b
-2025-12-27 23:27:31 [INFO    ] test_client:112 - 创建 FundClient 实例
-2025-12-27 23:27:31 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
-2025-12-27 23:27:31 [INFO    ] test_client:187 - ============================================================
-2025-12-27 23:27:31 [INFO    ] test_client:188 - 开始测试: test_subscribe_and_redeem
-2025-12-27 23:27:31 [INFO    ] test_client:189 - ============================================================
-2025-12-27 23:27:31 [INFO    ] test_client:193 - 步骤 1: 创建用户
-2025-12-27 23:27:31 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:33 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
-2025-12-27 23:27:33 [INFO    ] client:107 - 用户创建成功: USER_be70d36e65b14359
-2025-12-27 23:27:33 [INFO    ] test_client:198 - 用户创建成功，user_id: USER_be70d36e65b14359
-2025-12-27 23:27:33 [INFO    ] test_client:201 - 步骤 2: 开通基金账户
-2025-12-27 23:27:33 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:35 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 400 77
-2025-12-27 23:27:35 [ERROR   ] client:84 - 处理响应失败: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_be70d36e65b14359
-2025-12-27 23:27:35 [ERROR   ] test_client:260 - ✗ 申购和赎回测试失败: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_be70d36e65b14359
-Traceback (most recent call last):
-  File "d:\work\workspace\fi\tests\test_client.py", line 202, in test_subscribe_and_redeem
-    account_id = client.open_fund_account(user_id)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 139, in open_fund_account
-    result = self._request("POST", "/api/v1/accounts/open", json=data)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 78, in _request
-    raise Exception(f"HTTP错误 {response.status_code}: {error_detail}")
-Exception: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_be70d36e65b14359
-2025-12-27 23:27:35 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
-2025-12-27 23:27:35 [DEBUG   ] test_client:274 - 应用实例创建成功
-2025-12-27 23:27:35 [INFO    ] test_client:279 - ============================================================
-2025-12-27 23:27:35 [INFO    ] test_client:280 - 开始测试: test_register_and_login
-2025-12-27 23:27:35 [INFO    ] test_client:281 - ============================================================
-2025-12-27 23:27:35 [INFO    ] test_client:284 - 注册并登录: 测试用户, 320101199001011234
-2025-12-27 23:27:35 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:37 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
-2025-12-27 23:27:37 [INFO    ] client:107 - 用户创建成功: USER_e43e02e1b1b843f9
-2025-12-27 23:27:37 [INFO    ] client:306 - 用户注册并登录成功: USER_e43e02e1b1b843f9
-2025-12-27 23:27:37 [INFO    ] test_client:289 - 注册登录成功，user_id: USER_e43e02e1b1b843f9
-2025-12-27 23:27:37 [INFO    ] test_client:290 - 当前用户ID: USER_e43e02e1b1b843f9
-2025-12-27 23:27:37 [INFO    ] test_client:293 - ✓ 注册登录测试通过
-2025-12-27 23:27:37 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
-2025-12-27 23:27:37 [DEBUG   ] test_client:274 - 应用实例创建成功
-2025-12-27 23:27:37 [INFO    ] test_client:300 - ============================================================
-2025-12-27 23:27:37 [INFO    ] test_client:301 - 开始测试: test_open_account
-2025-12-27 23:27:37 [INFO    ] test_client:302 - ============================================================
-2025-12-27 23:27:37 [INFO    ] test_client:306 - 步骤 1: 注册并登录
-2025-12-27 23:27:37 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:39 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
-2025-12-27 23:27:39 [INFO    ] client:107 - 用户创建成功: USER_982e97b939604c45
-2025-12-27 23:27:39 [INFO    ] client:306 - 用户注册并登录成功: USER_982e97b939604c45
-2025-12-27 23:27:39 [INFO    ] test_client:308 - 当前用户ID: USER_982e97b939604c45
-2025-12-27 23:27:39 [INFO    ] test_client:311 - 步骤 2: 开通账户
-2025-12-27 23:27:39 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:41 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 400 77
-2025-12-27 23:27:41 [ERROR   ] client:84 - 处理响应失败: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_982e97b939604c45
-2025-12-27 23:27:41 [ERROR   ] test_client:319 - ✗ 开通账户测试失败: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_982e97b939604c45
-Traceback (most recent call last):
-  File "d:\work\workspace\fi\tests\test_client.py", line 312, in test_open_account
-    account_id = app.open_account()
-                 ^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 322, in open_account
-    account_id = self.client.open_fund_account(
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 139, in open_fund_account
-    result = self._request("POST", "/api/v1/accounts/open", json=data)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 78, in _request
-    raise Exception(f"HTTP错误 {response.status_code}: {error_detail}")
-Exception: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_982e97b939604c45
-2025-12-27 23:27:41 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
-2025-12-27 23:27:41 [DEBUG   ] test_client:274 - 应用实例创建成功
-2025-12-27 23:27:41 [INFO    ] test_client:324 - ============================================================
-2025-12-27 23:27:41 [INFO    ] test_client:325 - 开始测试: test_quick_subscribe
-2025-12-27 23:27:41 [INFO    ] test_client:326 - ============================================================
-2025-12-27 23:27:41 [INFO    ] test_client:330 - 步骤 1: 注册并登录
-2025-12-27 23:27:41 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:43 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
-2025-12-27 23:27:43 [INFO    ] client:107 - 用户创建成功: USER_b0ad2f3728cd4164
-2025-12-27 23:27:43 [INFO    ] client:306 - 用户注册并登录成功: USER_b0ad2f3728cd4164
-2025-12-27 23:27:43 [INFO    ] test_client:332 - 当前用户ID: USER_b0ad2f3728cd4164
-2025-12-27 23:27:43 [INFO    ] test_client:334 - 步骤 2: 开通账户
-2025-12-27 23:27:43 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
-2025-12-27 23:27:45 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 400 77
-2025-12-27 23:27:45 [ERROR   ] client:84 - 处理响应失败: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_b0ad2f3728cd4164
-2025-12-27 23:27:45 [ERROR   ] test_client:360 - ✗ 快速申购测试失败: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_b0ad2f3728cd4164
-Traceback (most recent call last):
-  File "d:\work\workspace\fi\tests\test_client.py", line 335, in test_quick_subscribe
-    app.open_account()
-  File "d:\work\workspace\fi\client.py", line 322, in open_account
-    account_id = self.client.open_fund_account(
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 139, in open_fund_account
-    result = self._request("POST", "/api/v1/accounts/open", json=data)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\work\workspace\fi\client.py", line 78, in _request
-    raise Exception(f"HTTP错误 {response.status_code}: {error_detail}")
-Exception: HTTP错误 400: 开通基金账户失败: 用户不存在: USER_b0ad2f3728cd4164
-2025-12-27 23:27:46 [INFO    ] test_client:371 - ================================================================================
-2025-12-27 23:27:46 [INFO    ] test_client:372 - 测试结束时间: 2025-12-27 23:27:46
-2025-12-27 23:27:46 [INFO    ] test_client:373 - 退出代码: 1
-2025-12-27 23:27:46 [INFO    ] test_client:374 - 日志文件位置: d:\work\workspace\fi\tests\test_client.log
-2025-12-27 23:27:46 [INFO    ] test_client:375 - ================================================================================
+2025-12-28 00:06:53 [INFO    ] test_client:100 - ================================================================================
+2025-12-28 00:06:53 [INFO    ] test_client:101 - 测试开始时间: 2025-12-28 00:06:53
+2025-12-28 00:06:53 [INFO    ] test_client:102 - 日志文件: d:\work\workspace\fi\tests\test_client.log
+2025-12-28 00:06:53 [INFO    ] test_client:103 - ================================================================================
+2025-12-28 00:06:53 [INFO    ] test_client:112 - 创建 FundClient 实例
+2025-12-28 00:06:53 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
+2025-12-28 00:06:53 [INFO    ] test_client:121 - ============================================================
+2025-12-28 00:06:53 [INFO    ] test_client:122 - 开始测试: test_health_check
+2025-12-28 00:06:53 [INFO    ] test_client:123 - ============================================================
+2025-12-28 00:06:53 [INFO    ] test_client:126 - 调用 health_check()
+2025-12-28 00:06:53 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:06:55 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/health HTTP/1.1" 200 45
+2025-12-28 00:06:55 [INFO    ] test_client:128 - 健康检查结果: {'status': 'healthy', 'timestamp': '2025-12-28'}
+2025-12-28 00:06:55 [INFO    ] test_client:130 - ✓ 健康检查测试通过
+2025-12-28 00:06:55 [INFO    ] test_client:112 - 创建 FundClient 实例
+2025-12-28 00:06:55 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
+2025-12-28 00:06:55 [INFO    ] test_client:137 - ============================================================
+2025-12-28 00:06:55 [INFO    ] test_client:138 - 开始测试: test_create_user
+2025-12-28 00:06:55 [INFO    ] test_client:139 - ============================================================
+2025-12-28 00:06:55 [INFO    ] test_client:142 - 创建用户: 测试用户, 320101199001011234
+2025-12-28 00:06:55 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:06:57 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
+2025-12-28 00:06:57 [INFO    ] client:107 - 用户创建成功: USER_f2545d2e60174ca9
+2025-12-28 00:06:57 [INFO    ] test_client:147 - 用户创建成功，user_id: USER_f2545d2e60174ca9
+2025-12-28 00:06:57 [INFO    ] test_client:151 - 获取用户信息: USER_f2545d2e60174ca9
+2025-12-28 00:06:57 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:06:59 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/users/USER_f2545d2e60174ca9 HTTP/1.1" 200 255
+2025-12-28 00:06:59 [INFO    ] test_client:153 - 用户信息: {'user_id': 'USER_f2545d2e60174ca9', 'user_name': '测试用户', 'user_type': 'PERSONAL', 'user_status': 'ACTIVE', 'identity_no': '320101199001011234', 'phone': None, 'email': None, 'create_time': '2025-12-28T00:06:57.503219', 'update_time': '2025-12-28T00:06:57.503219'}
+2025-12-28 00:06:59 [INFO    ] test_client:155 - ✓ 创建用户测试通过
+2025-12-28 00:06:59 [INFO    ] test_client:112 - 创建 FundClient 实例
+2025-12-28 00:06:59 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
+2025-12-28 00:06:59 [INFO    ] test_client:162 - ============================================================
+2025-12-28 00:06:59 [INFO    ] test_client:163 - 开始测试: test_open_fund_account
+2025-12-28 00:06:59 [INFO    ] test_client:164 - ============================================================
+2025-12-28 00:06:59 [INFO    ] test_client:168 - 步骤 1: 创建用户
+2025-12-28 00:06:59 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:01 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
+2025-12-28 00:07:01 [INFO    ] client:107 - 用户创建成功: USER_09f587514fbe4ede
+2025-12-28 00:07:01 [INFO    ] test_client:173 - 用户创建成功，user_id: USER_09f587514fbe4ede
+2025-12-28 00:07:01 [INFO    ] test_client:176 - 步骤 2: 开通基金账户，user_id: USER_09f587514fbe4ede
+2025-12-28 00:07:01 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:03 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 200 175
+2025-12-28 00:07:03 [INFO    ] client:141 - 基金账户开通成功: ACC_8b37bee171814e97
+2025-12-28 00:07:03 [INFO    ] test_client:178 - 基金账户开通成功，account_id: ACC_8b37bee171814e97
+2025-12-28 00:07:03 [INFO    ] test_client:180 - ✓ 开通基金账户测试通过
+2025-12-28 00:07:03 [INFO    ] test_client:112 - 创建 FundClient 实例
+2025-12-28 00:07:03 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
+2025-12-28 00:07:03 [INFO    ] test_client:187 - ============================================================
+2025-12-28 00:07:03 [INFO    ] test_client:188 - 开始测试: test_subscribe_and_redeem
+2025-12-28 00:07:03 [INFO    ] test_client:189 - ============================================================
+2025-12-28 00:07:03 [INFO    ] test_client:193 - 步骤 1: 创建用户
+2025-12-28 00:07:03 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:05 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
+2025-12-28 00:07:05 [INFO    ] client:107 - 用户创建成功: USER_29cce787e66b4e0a
+2025-12-28 00:07:05 [INFO    ] test_client:198 - 用户创建成功，user_id: USER_29cce787e66b4e0a
+2025-12-28 00:07:05 [INFO    ] test_client:201 - 步骤 2: 开通基金账户
+2025-12-28 00:07:05 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:07 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 200 175
+2025-12-28 00:07:07 [INFO    ] client:141 - 基金账户开通成功: ACC_b35e133b9a4f4b65
+2025-12-28 00:07:07 [INFO    ] test_client:203 - 基金账户开通成功，account_id: ACC_b35e133b9a4f4b65
+2025-12-28 00:07:07 [INFO    ] test_client:206 - 步骤 3: 获取产品列表
+2025-12-28 00:07:07 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:10 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/products HTTP/1.1" 200 40
+2025-12-28 00:07:10 [INFO    ] test_client:208 - 获取到 0 个产品
+2025-12-28 00:07:10 [WARNING ] test_client:210 - 没有可用的基金产品，跳过测试
+2025-12-28 00:07:10 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
+2025-12-28 00:07:10 [DEBUG   ] test_client:274 - 应用实例创建成功
+2025-12-28 00:07:10 [INFO    ] test_client:279 - ============================================================
+2025-12-28 00:07:10 [INFO    ] test_client:280 - 开始测试: test_register_and_login
+2025-12-28 00:07:10 [INFO    ] test_client:281 - ============================================================
+2025-12-28 00:07:10 [INFO    ] test_client:284 - 注册并登录: 测试用户, 320101199001011234
+2025-12-28 00:07:10 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:12 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
+2025-12-28 00:07:12 [INFO    ] client:107 - 用户创建成功: USER_6baca6114f7841b2
+2025-12-28 00:07:12 [INFO    ] client:306 - 用户注册并登录成功: USER_6baca6114f7841b2
+2025-12-28 00:07:12 [INFO    ] test_client:289 - 注册登录成功，user_id: USER_6baca6114f7841b2
+2025-12-28 00:07:12 [INFO    ] test_client:290 - 当前用户ID: USER_6baca6114f7841b2
+2025-12-28 00:07:12 [INFO    ] test_client:293 - ✓ 注册登录测试通过
+2025-12-28 00:07:12 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
+2025-12-28 00:07:12 [DEBUG   ] test_client:274 - 应用实例创建成功
+2025-12-28 00:07:12 [INFO    ] test_client:300 - ============================================================
+2025-12-28 00:07:12 [INFO    ] test_client:301 - 开始测试: test_open_account
+2025-12-28 00:07:12 [INFO    ] test_client:302 - ============================================================
+2025-12-28 00:07:12 [INFO    ] test_client:306 - 步骤 1: 注册并登录
+2025-12-28 00:07:12 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:14 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
+2025-12-28 00:07:14 [INFO    ] client:107 - 用户创建成功: USER_3709f570d51643c0
+2025-12-28 00:07:14 [INFO    ] client:306 - 用户注册并登录成功: USER_3709f570d51643c0
+2025-12-28 00:07:14 [INFO    ] test_client:308 - 当前用户ID: USER_3709f570d51643c0
+2025-12-28 00:07:14 [INFO    ] test_client:311 - 步骤 2: 开通账户
+2025-12-28 00:07:14 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:16 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 200 175
+2025-12-28 00:07:16 [INFO    ] client:141 - 基金账户开通成功: ACC_4f7a67faad3f4bbc
+2025-12-28 00:07:16 [INFO    ] client:328 - 基金账户开通成功: ACC_4f7a67faad3f4bbc
+2025-12-28 00:07:16 [INFO    ] test_client:313 - 账户开通成功，account_id: ACC_4f7a67faad3f4bbc
+2025-12-28 00:07:16 [INFO    ] test_client:314 - 当前账户ID: ACC_4f7a67faad3f4bbc
+2025-12-28 00:07:16 [INFO    ] test_client:317 - ✓ 开通账户测试通过
+2025-12-28 00:07:16 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
+2025-12-28 00:07:16 [DEBUG   ] test_client:274 - 应用实例创建成功
+2025-12-28 00:07:16 [INFO    ] test_client:324 - ============================================================
+2025-12-28 00:07:16 [INFO    ] test_client:325 - 开始测试: test_quick_subscribe
+2025-12-28 00:07:16 [INFO    ] test_client:326 - ============================================================
+2025-12-28 00:07:16 [INFO    ] test_client:330 - 步骤 1: 注册并登录
+2025-12-28 00:07:16 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:18 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
+2025-12-28 00:07:18 [INFO    ] client:107 - 用户创建成功: USER_bf47f738ca9b49f8
+2025-12-28 00:07:18 [INFO    ] client:306 - 用户注册并登录成功: USER_bf47f738ca9b49f8
+2025-12-28 00:07:18 [INFO    ] test_client:332 - 当前用户ID: USER_bf47f738ca9b49f8
+2025-12-28 00:07:18 [INFO    ] test_client:334 - 步骤 2: 开通账户
+2025-12-28 00:07:18 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:20 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 200 175
+2025-12-28 00:07:20 [INFO    ] client:141 - 基金账户开通成功: ACC_78d7ddc13027444b
+2025-12-28 00:07:20 [INFO    ] client:328 - 基金账户开通成功: ACC_78d7ddc13027444b
+2025-12-28 00:07:20 [INFO    ] test_client:336 - 当前账户ID: ACC_78d7ddc13027444b
+2025-12-28 00:07:20 [INFO    ] test_client:339 - 步骤 3: 获取产品列表
+2025-12-28 00:07:20 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:07:22 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/products HTTP/1.1" 200 40
+2025-12-28 00:07:22 [INFO    ] test_client:341 - 获取到 0 个产品
+2025-12-28 00:07:22 [WARNING ] test_client:343 - 没有可用的基金产品，跳过测试
+2025-12-28 00:07:22 [INFO    ] test_client:371 - ================================================================================
+2025-12-28 00:07:22 [INFO    ] test_client:372 - 测试结束时间: 2025-12-28 00:07:22
+2025-12-28 00:07:22 [INFO    ] test_client:373 - 退出代码: 0
+2025-12-28 00:07:22 [INFO    ] test_client:374 - 日志文件位置: d:\work\workspace\fi\tests\test_client.log
+2025-12-28 00:07:22 [INFO    ] test_client:375 - ================================================================================
