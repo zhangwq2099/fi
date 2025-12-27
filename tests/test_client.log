@@ -34,3 +34,91 @@
 2025-12-28 00:02:50 [INFO    ] test_client:164 - ============================================================
 2025-12-28 00:02:50 [INFO    ] test_client:168 - 步骤 1: 创建用户
 2025-12-28 00:02:50 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:02:53 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
+2025-12-28 00:02:53 [INFO    ] client:107 - 用户创建成功: USER_a0ea3cb04d164e53
+2025-12-28 00:02:53 [INFO    ] test_client:173 - 用户创建成功，user_id: USER_a0ea3cb04d164e53
+2025-12-28 00:02:53 [INFO    ] test_client:176 - 步骤 2: 开通基金账户，user_id: USER_a0ea3cb04d164e53
+2025-12-28 00:02:53 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:02:55 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 200 175
+2025-12-28 00:02:55 [INFO    ] client:141 - 基金账户开通成功: ACC_dc9ce397270f493d
+2025-12-28 00:02:55 [INFO    ] test_client:178 - 基金账户开通成功，account_id: ACC_dc9ce397270f493d
+2025-12-28 00:02:55 [INFO    ] test_client:180 - ✓ 开通基金账户测试通过
+2025-12-28 00:02:55 [INFO    ] test_client:112 - 创建 FundClient 实例
+2025-12-28 00:02:55 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
+2025-12-28 00:02:55 [INFO    ] test_client:187 - ============================================================
+2025-12-28 00:02:55 [INFO    ] test_client:188 - 开始测试: test_subscribe_and_redeem
+2025-12-28 00:02:55 [INFO    ] test_client:189 - ============================================================
+2025-12-28 00:02:55 [INFO    ] test_client:193 - 步骤 1: 创建用户
+2025-12-28 00:02:55 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:02:57 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
+2025-12-28 00:02:57 [INFO    ] client:107 - 用户创建成功: USER_c764f6f13f944c00
+2025-12-28 00:02:57 [INFO    ] test_client:198 - 用户创建成功，user_id: USER_c764f6f13f944c00
+2025-12-28 00:02:57 [INFO    ] test_client:201 - 步骤 2: 开通基金账户
+2025-12-28 00:02:57 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:02:59 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 200 175
+2025-12-28 00:02:59 [INFO    ] client:141 - 基金账户开通成功: ACC_95294e0c898b4c51
+2025-12-28 00:02:59 [INFO    ] test_client:203 - 基金账户开通成功，account_id: ACC_95294e0c898b4c51
+2025-12-28 00:02:59 [INFO    ] test_client:206 - 步骤 3: 获取产品列表
+2025-12-28 00:02:59 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:03:01 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/products HTTP/1.1" 200 40
+2025-12-28 00:03:01 [INFO    ] test_client:208 - 获取到 0 个产品
+2025-12-28 00:03:01 [WARNING ] test_client:210 - 没有可用的基金产品，跳过测试
+2025-12-28 00:03:01 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
+2025-12-28 00:03:01 [DEBUG   ] test_client:274 - 应用实例创建成功
+2025-12-28 00:03:01 [INFO    ] test_client:279 - ============================================================
+2025-12-28 00:03:01 [INFO    ] test_client:280 - 开始测试: test_register_and_login
+2025-12-28 00:03:01 [INFO    ] test_client:281 - ============================================================
+2025-12-28 00:03:01 [INFO    ] test_client:284 - 注册并登录: 测试用户, 320101199001011234
+2025-12-28 00:03:01 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:03:03 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
+2025-12-28 00:03:03 [INFO    ] client:107 - 用户创建成功: USER_1dd26aa4ec0747f1
+2025-12-28 00:03:03 [INFO    ] client:306 - 用户注册并登录成功: USER_1dd26aa4ec0747f1
+2025-12-28 00:03:03 [INFO    ] test_client:289 - 注册登录成功，user_id: USER_1dd26aa4ec0747f1
+2025-12-28 00:03:03 [INFO    ] test_client:290 - 当前用户ID: USER_1dd26aa4ec0747f1
+2025-12-28 00:03:03 [INFO    ] test_client:293 - ✓ 注册登录测试通过
+2025-12-28 00:03:03 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
+2025-12-28 00:03:03 [DEBUG   ] test_client:274 - 应用实例创建成功
+2025-12-28 00:03:03 [INFO    ] test_client:300 - ============================================================
+2025-12-28 00:03:03 [INFO    ] test_client:301 - 开始测试: test_open_account
+2025-12-28 00:03:03 [INFO    ] test_client:302 - ============================================================
+2025-12-28 00:03:03 [INFO    ] test_client:306 - 步骤 1: 注册并登录
+2025-12-28 00:03:03 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:03:05 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
+2025-12-28 00:03:05 [INFO    ] client:107 - 用户创建成功: USER_1e95fc6cddb54abf
+2025-12-28 00:03:05 [INFO    ] client:306 - 用户注册并登录成功: USER_1e95fc6cddb54abf
+2025-12-28 00:03:05 [INFO    ] test_client:308 - 当前用户ID: USER_1e95fc6cddb54abf
+2025-12-28 00:03:05 [INFO    ] test_client:311 - 步骤 2: 开通账户
+2025-12-28 00:03:05 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:03:07 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 200 175
+2025-12-28 00:03:07 [INFO    ] client:141 - 基金账户开通成功: ACC_1bdf5ee6518d4b8e
+2025-12-28 00:03:07 [INFO    ] client:328 - 基金账户开通成功: ACC_1bdf5ee6518d4b8e
+2025-12-28 00:03:07 [INFO    ] test_client:313 - 账户开通成功，account_id: ACC_1bdf5ee6518d4b8e
+2025-12-28 00:03:07 [INFO    ] test_client:314 - 当前账户ID: ACC_1bdf5ee6518d4b8e
+2025-12-28 00:03:07 [INFO    ] test_client:317 - ✓ 开通账户测试通过
+2025-12-28 00:03:07 [INFO    ] test_client:270 - 创建 FundTradingApp 实例
+2025-12-28 00:03:07 [DEBUG   ] test_client:274 - 应用实例创建成功
+2025-12-28 00:03:07 [INFO    ] test_client:324 - ============================================================
+2025-12-28 00:03:07 [INFO    ] test_client:325 - 开始测试: test_quick_subscribe
+2025-12-28 00:03:07 [INFO    ] test_client:326 - ============================================================
+2025-12-28 00:03:07 [INFO    ] test_client:330 - 步骤 1: 注册并登录
+2025-12-28 00:03:07 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:03:10 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 286
+2025-12-28 00:03:10 [INFO    ] client:107 - 用户创建成功: USER_9d80e0ac4b5b44fd
+2025-12-28 00:03:10 [INFO    ] client:306 - 用户注册并登录成功: USER_9d80e0ac4b5b44fd
+2025-12-28 00:03:10 [INFO    ] test_client:332 - 当前用户ID: USER_9d80e0ac4b5b44fd
+2025-12-28 00:03:10 [INFO    ] test_client:334 - 步骤 2: 开通账户
+2025-12-28 00:03:10 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:03:12 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/accounts/open HTTP/1.1" 200 175
+2025-12-28 00:03:12 [INFO    ] client:141 - 基金账户开通成功: ACC_ef84c80391644e39
+2025-12-28 00:03:12 [INFO    ] client:328 - 基金账户开通成功: ACC_ef84c80391644e39
+2025-12-28 00:03:12 [INFO    ] test_client:336 - 当前账户ID: ACC_ef84c80391644e39
+2025-12-28 00:03:12 [INFO    ] test_client:339 - 步骤 3: 获取产品列表
+2025-12-28 00:03:12 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:03:14 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/products HTTP/1.1" 200 40
+2025-12-28 00:03:14 [INFO    ] test_client:341 - 获取到 0 个产品
+2025-12-28 00:03:14 [WARNING ] test_client:343 - 没有可用的基金产品，跳过测试
+2025-12-28 00:03:14 [INFO    ] test_client:371 - ================================================================================
+2025-12-28 00:03:14 [INFO    ] test_client:372 - 测试结束时间: 2025-12-28 00:03:14
+2025-12-28 00:03:14 [INFO    ] test_client:373 - 退出代码: 0
+2025-12-28 00:03:14 [INFO    ] test_client:374 - 日志文件位置: d:\work\workspace\fi\tests\test_client.log
+2025-12-28 00:03:14 [INFO    ] test_client:375 - ================================================================================
