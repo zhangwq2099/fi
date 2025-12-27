@@ -78,6 +78,35 @@ class RepositoryAdapter(Repository):
             )
         return None
     
+    def create_user(self, user: User) -> User:
+        """创建用户（同时写入 common_repo 和旧存储，确保数据共享）"""
+        # 先调用父类方法，写入旧存储并初始化余额
+        result = super().create_user(user)
+        
+        # 同时写入 common_repo
+        user_data = user.model_dump()
+        # 转换为 common_repo 格式（使用 'id' 作为主键）
+        common_user_data = {
+            'id': user.user_id,
+            'user_id': user.user_id,
+            'user_name': user.user_name,
+            'user_type': user.user_type,
+            'user_status': user.user_status,
+            'identity_no': user.identity_no,
+            'phone': user.phone,
+            'email': user.email,
+            'create_time': user.create_time,
+            'update_time': user.update_time
+        }
+        try:
+            self._common_repo.create("user", common_user_data)
+            logger.debug(f"用户已同步到 common_repo: {user.user_id}")
+        except Exception as e:
+            # 如果 common_repo 中已存在，忽略错误（可能已存在）
+            logger.warning(f"写入 common_repo 失败（可能已存在）: {e}")
+        
+        return result
+    
     def create_fund_account(self, account):
         """创建基金账户（同时写入 common_repo 和旧存储）"""
         # 先调用父类方法，写入旧存储
