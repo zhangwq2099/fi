@@ -9,3 +9,28 @@
 2025-12-28 00:02:44 [INFO    ] test_client:123 - ============================================================
 2025-12-28 00:02:44 [INFO    ] test_client:126 - 调用 health_check()
 2025-12-28 00:02:44 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:02:46 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/health HTTP/1.1" 200 45
+2025-12-28 00:02:46 [INFO    ] test_client:128 - 健康检查结果: {'status': 'healthy', 'timestamp': '2025-12-28'}
+2025-12-28 00:02:46 [INFO    ] test_client:130 - ✓ 健康检查测试通过
+2025-12-28 00:02:46 [INFO    ] test_client:112 - 创建 FundClient 实例
+2025-12-28 00:02:46 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
+2025-12-28 00:02:46 [INFO    ] test_client:137 - ============================================================
+2025-12-28 00:02:46 [INFO    ] test_client:138 - 开始测试: test_create_user
+2025-12-28 00:02:46 [INFO    ] test_client:139 - ============================================================
+2025-12-28 00:02:46 [INFO    ] test_client:142 - 创建用户: 测试用户, 320101199001011234
+2025-12-28 00:02:46 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:02:48 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "POST /api/v1/users HTTP/1.1" 201 255
+2025-12-28 00:02:48 [INFO    ] client:107 - 用户创建成功: USER_6f4c8f5ba49b4ef9
+2025-12-28 00:02:48 [INFO    ] test_client:147 - 用户创建成功，user_id: USER_6f4c8f5ba49b4ef9
+2025-12-28 00:02:48 [INFO    ] test_client:151 - 获取用户信息: USER_6f4c8f5ba49b4ef9
+2025-12-28 00:02:48 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
+2025-12-28 00:02:50 [DEBUG   ] urllib3.connectionpool:544 - http://localhost:8000 "GET /api/v1/users/USER_6f4c8f5ba49b4ef9 HTTP/1.1" 200 255
+2025-12-28 00:02:50 [INFO    ] test_client:153 - 用户信息: {'user_id': 'USER_6f4c8f5ba49b4ef9', 'user_name': '测试用户', 'user_type': 'PERSONAL', 'user_status': 'ACTIVE', 'identity_no': '320101199001011234', 'phone': None, 'email': None, 'create_time': '2025-12-28T00:02:48.858282', 'update_time': '2025-12-28T00:02:48.858282'}
+2025-12-28 00:02:50 [INFO    ] test_client:155 - ✓ 创建用户测试通过
+2025-12-28 00:02:50 [INFO    ] test_client:112 - 创建 FundClient 实例
+2025-12-28 00:02:50 [DEBUG   ] test_client:116 - 客户端创建成功，base_url: http://localhost:8000
+2025-12-28 00:02:50 [INFO    ] test_client:162 - ============================================================
+2025-12-28 00:02:50 [INFO    ] test_client:163 - 开始测试: test_open_fund_account
+2025-12-28 00:02:50 [INFO    ] test_client:164 - ============================================================
+2025-12-28 00:02:50 [INFO    ] test_client:168 - 步骤 1: 创建用户
+2025-12-28 00:02:50 [DEBUG   ] urllib3.connectionpool:241 - Starting new HTTP connection (1): localhost:8000
