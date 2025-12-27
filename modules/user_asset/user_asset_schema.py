@@ -49,3 +49,4 @@ class UserAssetsResponse(BaseModel):
     fund_assets: List[Dict[str, Any]]
     calc_date: date
 
+

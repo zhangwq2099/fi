@@ -93,3 +93,4 @@ class SettlementType(str, Enum):
     CAPITAL_IN = "CAPITAL_IN"
     CAPITAL_OUT = "CAPITAL_OUT"
 
+

@@ -23,7 +23,7 @@ async def create_transaction_entrust(
     """创建交易委托"""
     try:
         obj = app.create(request)
-        return TransactionEntrustResponse(**obj.dict())
+        return TransactionEntrustResponse(**obj.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -43,4 +43,4 @@ async def get_transaction_entrust(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"交易委托不存在: {id}"
         )
-    return TransactionEntrustResponse(**obj.dict())
+    return TransactionEntrustResponse(**obj.model_dump())

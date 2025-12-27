@@ -29,7 +29,7 @@ class TransactionConfirmAPI:
     
     def create(self, request: TransactionConfirmCreateRequest) -> TransactionConfirmResponse:
         """创建交易确认"""
-        result = self._request("POST", "/api/v1/transaction-confirm", json=request.dict())
+        result = self._request("POST", "/api/v1/transaction-confirm", json=request.model_dump())
         return TransactionConfirmResponse(**result)
     
     def get(self, id: str) -> TransactionConfirmResponse:

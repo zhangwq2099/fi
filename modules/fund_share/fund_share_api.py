@@ -29,7 +29,7 @@ class FundShareAPI:
     
     def create(self, request: FundShareCreateRequest) -> FundShareResponse:
         """创建基金份额"""
-        result = self._request("POST", "/api/v1/fund-share", json=request.dict())
+        result = self._request("POST", "/api/v1/fund-share", json=request.model_dump())
         return FundShareResponse(**result)
     
     def get(self, id: str) -> FundShareResponse:

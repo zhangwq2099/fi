@@ -23,7 +23,7 @@ async def create_fund_account(
     """创建基金账户"""
     try:
         obj = app.create(request)
-        return FundAccountResponse(**obj.dict())
+        return FundAccountResponse(**obj.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -43,4 +43,4 @@ async def get_fund_account(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"基金账户不存在: {id}"
         )
-    return FundAccountResponse(**obj.dict())
+    return FundAccountResponse(**obj.model_dump())

@@ -234,3 +234,4 @@ CREATE TABLE IF NOT EXISTS `user_fund_asset` (
     INDEX `idx_user_date` (`user_id`, `calc_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户基金资产表';
 
+

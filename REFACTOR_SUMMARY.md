@@ -106,8 +106,22 @@
 
 ```
 fi/
+├── main.py                      # FastAPI微服务入口（原始版本）
+├── main_v2.py                   # FastAPI微服务入口（模块化版本，推荐）
+├── run_service.py               # 便捷启动脚本
+├── models.py                    # Pydantic数据模型（原始版本）
+├── repository.py                # 数据存储层（内存，原始版本）
+├── service.py                   # 业务服务层（原始版本）
+├── client.py                    # 客户端业务接口
+├── interactive_client.py        # 交互式客户端
+├── test_api.py                  # API测试脚本
+├── test_modules.py              # 模块测试脚本
+├── verify.py                    # 验证脚本
+├── generate_modules.py          # 模块生成脚本
+├── create_table_model_excel.py  # 表模型Excel生成脚本
+├── requirements.txt             # 项目依赖
 ├── database/
-│   ├── schema.sql              # SQL建表语句
+│   ├── schema.sql               # SQL建表语句
 │   └── 表模型.xlsx              # Excel表模型
 ├── common/
 │   ├── __init__.py
@@ -116,29 +130,104 @@ fi/
 ├── modules/
 │   ├── user/                    # 用户模块（完整实现）
 │   │   ├── __init__.py
-│   │   ├── user_schema.py
-│   │   ├── user_app.py
-│   │   ├── user_web.py
-│   │   └── user_api.py
+│   │   ├── user_schema.py       # 数据模型层
+│   │   ├── user_app.py          # 业务逻辑层
+│   │   ├── user_api.py          # API接口层
+│   │   └── user_web.py         # Web路由层
 │   ├── user_asset/              # 用户资产模块（完整实现）
 │   │   ├── __init__.py
 │   │   ├── user_asset_schema.py
 │   │   ├── user_asset_app.py
-│   │   ├── user_asset_web.py
-│   │   └── user_asset_api.py
+│   │   ├── user_asset_api.py
+│   │   └── user_asset_web.py
 │   ├── bank_account/            # 银行账户模块（基础结构）
-│   ├── capital_entrust/          # 资金委托模块（基础结构）
+│   │   ├── __init__.py
+│   │   ├── bank_account_schema.py
+│   │   ├── bank_account_app.py
+│   │   ├── bank_account_api.py
+│   │   └── bank_account_web.py
+│   ├── capital_entrust/         # 资金委托模块（基础结构）
+│   │   ├── __init__.py
+│   │   ├── capital_entrust_schema.py
+│   │   ├── capital_entrust_app.py
+│   │   ├── capital_entrust_api.py
+│   │   └── capital_entrust_web.py
 │   ├── capital_settlement/      # 资金清算模块（基础结构）
+│   │   ├── __init__.py
+│   │   ├── capital_settlement_schema.py
+│   │   ├── capital_settlement_app.py
+│   │   ├── capital_settlement_api.py
+│   │   └── capital_settlement_web.py
 │   ├── fund_account/            # 基金账户模块（基础结构）
+│   │   ├── __init__.py
+│   │   ├── fund_account_schema.py
+│   │   ├── fund_account_app.py
+│   │   ├── fund_account_api.py
+│   │   └── fund_account_web.py
 │   ├── fund_product/            # 基金产品模块（基础结构）
-│   ├── transaction_entrust/      # 交易委托模块（基础结构）
+│   │   ├── __init__.py
+│   │   ├── fund_product_schema.py
+│   │   ├── fund_product_app.py
+│   │   ├── fund_product_api.py
+│   │   └── fund_product_web.py
+│   ├── transaction_entrust/     # 交易委托模块（基础结构）
+│   │   ├── __init__.py
+│   │   ├── transaction_entrust_schema.py
+│   │   ├── transaction_entrust_app.py
+│   │   ├── transaction_entrust_api.py
+│   │   └── transaction_entrust_web.py
 │   ├── transaction_confirm/     # 交易确认模块（基础结构）
+│   │   ├── __init__.py
+│   │   ├── transaction_confirm_schema.py
+│   │   ├── transaction_confirm_app.py
+│   │   ├── transaction_confirm_api.py
+│   │   └── transaction_confirm_web.py
 │   └── fund_share/              # 基金份额模块（基础结构）
-├── main_v2.py                   # 新的主入口文件
-├── generate_modules.py          # 模块生成脚本
+│       ├── __init__.py
+│       ├── fund_share_schema.py
+│       ├── fund_share_app.py
+│       ├── fund_share_api.py
+│       └── fund_share_web.py
+├── tests/                       # 测试目录
+│   ├── __init__.py
+│   ├── test_models.py
+│   ├── test_service.py
+│   ├── test_client.py
+│   ├── test_integration.py
+│   └── README.md
+├── docs/                        # 文档目录
+│   └── er图.png
+├── .vscode/                     # VS Code配置
+│   ├── launch.json
+│   ├── tasks.json
+│   └── settings.json
 ├── REFACTOR_GUIDE.md            # 重构指南
 └── REFACTOR_SUMMARY.md          # 本文件
 ```
+
+### 模块命名规范说明
+
+每个业务模块遵循统一的4层架构设计：
+
+1. **`{module_name}_schema.py`** - 数据模型层
+   - 使用Pydantic定义数据模型
+   - 包含请求模型和响应模型
+   - 数据验证规则
+
+2. **`{module_name}_app.py`** - 业务逻辑层
+   - 实现核心业务逻辑
+   - 调用统一数据存储层（`common/repository.py`）
+   - 业务规则验证
+
+3. **`{module_name}_api.py`** - API接口层
+   - 定义API接口方法
+   - 参数处理和转换
+   - 调用业务逻辑层
+
+4. **`{module_name}_web.py`** - Web路由层
+   - 定义FastAPI路由
+   - 请求/响应处理
+   - 注册到主应用（`main_v2.py`）
 
 ## 下一步工作
 
@@ -194,4 +283,5 @@ python main_v2.py
 - ⏳ 其他模块：基础结构已生成，待完善实现
 
 总体进度：约60%完成
+
 

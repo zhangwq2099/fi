@@ -23,7 +23,7 @@ async def create_transaction_confirm(
     """创建交易确认"""
     try:
         obj = app.create(request)
-        return TransactionConfirmResponse(**obj.dict())
+        return TransactionConfirmResponse(**obj.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -43,4 +43,4 @@ async def get_transaction_confirm(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"交易确认不存在: {id}"
         )
-    return TransactionConfirmResponse(**obj.dict())
+    return TransactionConfirmResponse(**obj.model_dump())

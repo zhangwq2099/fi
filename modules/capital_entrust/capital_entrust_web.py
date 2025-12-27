@@ -23,7 +23,7 @@ async def create_capital_entrust(
     """创建资金委托"""
     try:
         obj = app.create(request)
-        return CapitalEntrustResponse(**obj.dict())
+        return CapitalEntrustResponse(**obj.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -43,4 +43,4 @@ async def get_capital_entrust(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"资金委托不存在: {id}"
         )
-    return CapitalEntrustResponse(**obj.dict())
+    return CapitalEntrustResponse(**obj.model_dump())

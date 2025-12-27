@@ -29,7 +29,7 @@ class CapitalEntrustAPI:
     
     def create(self, request: CapitalEntrustCreateRequest) -> CapitalEntrustResponse:
         """创建资金委托"""
-        result = self._request("POST", "/api/v1/capital-entrust", json=request.dict())
+        result = self._request("POST", "/api/v1/capital-entrust", json=request.model_dump())
         return CapitalEntrustResponse(**result)
     
     def get(self, id: str) -> CapitalEntrustResponse:

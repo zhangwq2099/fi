@@ -23,7 +23,7 @@ async def create_capital_settlement(
     """创建资金清算"""
     try:
         obj = app.create(request)
-        return CapitalSettlementResponse(**obj.dict())
+        return CapitalSettlementResponse(**obj.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -43,4 +43,4 @@ async def get_capital_settlement(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"资金清算不存在: {id}"
         )
-    return CapitalSettlementResponse(**obj.dict())
+    return CapitalSettlementResponse(**obj.model_dump())

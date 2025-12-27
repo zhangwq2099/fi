@@ -2,11 +2,34 @@
 
 ## 重构概述
 
-根据需求，已将系统按实体拆分为多个模块，每个模块包含：
-- `{实体名}_schema.py` - 数据模型（Pydantic BaseModel）
-- `{实体名}_app.py` - 应用服务层（业务逻辑）
-- `{实体名}_web.py` - 微服务API层（FastAPI路由）
-- `{实体名}_api.py` - 客户端调用接口
+根据需求，已将系统按实体拆分为多个模块，每个模块遵循统一的4层架构设计：
+
+1. **`{module_name}_schema.py`** - 数据模型层
+   - 使用Pydantic定义数据模型
+   - 包含请求模型（Request）和响应模型（Response）
+   - 数据验证和类型检查
+
+2. **`{module_name}_app.py`** - 业务逻辑层
+   - 实现核心业务逻辑
+   - 调用统一数据存储层（`common/repository.py`）
+   - 业务规则验证和处理
+
+3. **`{module_name}_api.py`** - API接口层
+   - 定义API接口方法
+   - 参数处理和转换
+   - 调用业务逻辑层（`*_app.py`）
+
+4. **`{module_name}_web.py`** - Web路由层
+   - 定义FastAPI路由和端点
+   - 请求/响应处理
+   - 通过`main_v2.py`注册到主应用
+
+### 命名规范
+
+- **模块目录**: 使用小写字母和下划线（snake_case），如 `user_asset/`
+- **文件名**: 使用小写字母和下划线，如 `user_asset_schema.py`
+- **类名**: 使用大驼峰命名（PascalCase），如 `UserApp`
+- **函数/变量名**: 使用小写字母和下划线，如 `create_user()`
 
 ## 已完成的模块
 
@@ -19,8 +42,8 @@
 ### 2. 用户资产模块 (modules/user_asset/)
 - ✅ `user_asset_schema.py` - 用户资产数据模型
 - ✅ `user_asset_app.py` - 用户资产应用服务
-- ⏳ `user_asset_web.py` - 用户资产微服务API（待创建）
-- ⏳ `user_asset_api.py` - 用户资产客户端API（待创建）
+- ✅ `user_asset_web.py` - 用户资产微服务API
+- ✅ `user_asset_api.py` - 用户资产客户端API
 
 ## 待创建的模块
 
@@ -358,4 +381,5 @@ if __name__ == "__main__":
 2. 更新主入口文件整合所有路由
 3. 更新测试文件
 4. 更新文档
+
 

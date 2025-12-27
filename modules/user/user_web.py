@@ -24,7 +24,7 @@ async def create_user(
     """创建用户"""
     try:
         user = app.create_user(request)
-        return UserResponse(**user.dict())
+        return UserResponse(**user.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -44,7 +44,7 @@ async def get_user(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"用户不存在: {user_id}"
         )
-    return UserResponse(**user.dict())
+    return UserResponse(**user.model_dump())
 
 
 @router.get("", response_model=List[UserResponse])
@@ -53,5 +53,6 @@ async def list_users(
 ):
     """列出用户"""
     users = app.list_users()
-    return [UserResponse(**user.dict()) for user in users]
+    return [UserResponse(**user.model_dump()) for user in users]
+
 

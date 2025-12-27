@@ -23,7 +23,7 @@ async def create_bank_account(
     """创建银行账户"""
     try:
         obj = app.create(request)
-        return BankAccountResponse(**obj.dict())
+        return BankAccountResponse(**obj.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -43,4 +43,4 @@ async def get_bank_account(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"银行账户不存在: {id}"
         )
-    return BankAccountResponse(**obj.dict())
+    return BankAccountResponse(**obj.model_dump())

@@ -1,14 +1,21 @@
 """
 测试数据模型
 """
-import pytest
+import os
+import sys
+
+# 添加项目根目录到 Python 路径
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from datetime import date, datetime
 from decimal import Decimal
-from models import (
-    User, FundAccount, FundProduct, FundNetValue, UserBalance, FundShare,
-    EntrustBase, FundTransactionEntrust, UserTotalAsset,
-    UserType, UserStatus, BusinessType, EntrustStatus, TransactionType
-)
+
+import pytest
+
+from models import (BusinessType, EntrustBase, EntrustStatus, FundAccount,
+                    FundNetValue, FundProduct, FundShare,
+                    FundTransactionEntrust, TransactionType, User, UserBalance,
+                    UserStatus, UserTotalAsset, UserType)
 
 
 class TestUser:
@@ -118,4 +125,5 @@ class TestEntrustBase:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+
 

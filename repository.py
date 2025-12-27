@@ -46,7 +46,7 @@ class Repository:
         """创建用户"""
         if user.user_id in self._storage['users']:
             raise ValueError(f"用户已存在: {user.user_id}")
-        self._storage['users'][user.user_id] = user.dict()
+        self._storage['users'][user.user_id] = user.model_dump()
         # 初始化用户余额
         balance = UserBalance(
             balance_id=self._generate_id('BAL_'),
@@ -55,7 +55,7 @@ class Repository:
             frozen_balance=Decimal('0'),
             total_balance=Decimal('0')
         )
-        self._storage['user_balances'][balance.balance_id] = balance.dict()
+        self._storage['user_balances'][balance.balance_id] = balance.model_dump()
         return user
     
     def get_user(self, user_id: str) -> Optional[User]:
@@ -75,7 +75,7 @@ class Repository:
         """创建基金账户"""
         if account.fund_account_id in self._storage['fund_accounts']:
             raise ValueError(f"基金账户已存在: {account.fund_account_id}")
-        self._storage['fund_accounts'][account.fund_account_id] = account.dict()
+        self._storage['fund_accounts'][account.fund_account_id] = account.model_dump()
         return account
     
     def get_fund_account(self, fund_account_id: str) -> Optional[FundAccount]:
@@ -99,7 +99,7 @@ class Repository:
         """创建基金产品"""
         if product.product_id in self._storage['fund_products']:
             raise ValueError(f"基金产品已存在: {product.product_id}")
-        self._storage['fund_products'][product.product_id] = product.dict()
+        self._storage['fund_products'][product.product_id] = product.model_dump()
         return product
     
     def get_fund_product(self, product_id: str) -> Optional[FundProduct]:
@@ -121,7 +121,7 @@ class Repository:
     
     def create_fund_net_value(self, nav: FundNetValue) -> FundNetValue:
         """创建基金净值"""
-        self._storage['fund_net_values'][nav.nav_id] = nav.dict()
+        self._storage['fund_net_values'][nav.nav_id] = nav.model_dump()
         return nav
     
     def get_latest_nav(self, product_id: str) -> Optional[FundNetValue]:
@@ -161,7 +161,7 @@ class Repository:
         # 计算总余额
         balance.total_balance = balance.available_balance + balance.frozen_balance
         balance.last_update = datetime.now()
-        self._storage['user_balances'][balance.balance_id] = balance.dict()
+        self._storage['user_balances'][balance.balance_id] = balance.model_dump()
         return balance
     
     # ==================== 基金份额相关 ====================
@@ -177,7 +177,7 @@ class Repository:
     def create_or_update_fund_share(self, share: FundShare) -> FundShare:
         """创建或更新基金份额"""
         share.last_update = datetime.now()
-        self._storage['fund_shares'][share.share_id] = share.dict()
+        self._storage['fund_shares'][share.share_id] = share.model_dump()
         return share
     
     def get_account_shares(self, fund_account_id: str) -> List[FundShare]:
@@ -192,7 +192,7 @@ class Repository:
     
     def create_entrust(self, entrust: EntrustBase) -> EntrustBase:
         """创建委托"""
-        self._storage['entrust_base'][entrust.entrust_id] = entrust.dict()
+        self._storage['entrust_base'][entrust.entrust_id] = entrust.model_dump()
         return entrust
     
     def get_entrust(self, entrust_id: str) -> Optional[EntrustBase]:
@@ -204,36 +204,36 @@ class Repository:
     
     def update_entrust(self, entrust: EntrustBase) -> EntrustBase:
         """更新委托"""
-        self._storage['entrust_base'][entrust.entrust_id] = entrust.dict()
+        self._storage['entrust_base'][entrust.entrust_id] = entrust.model_dump()
         return entrust
     
     def create_fund_transaction_entrust(self, entrust: FundTransactionEntrust) -> FundTransactionEntrust:
         """创建基金交易委托"""
-        self._storage['fund_transaction_entrusts'][entrust.entrust_id] = entrust.dict()
+        self._storage['fund_transaction_entrusts'][entrust.entrust_id] = entrust.model_dump()
         return entrust
     
     def create_fund_account_entrust(self, entrust: FundAccountEntrust) -> FundAccountEntrust:
         """创建基金账户委托"""
-        self._storage['fund_account_entrusts'][entrust.entrust_id] = entrust.dict()
+        self._storage['fund_account_entrusts'][entrust.entrust_id] = entrust.model_dump()
         return entrust
     
     # ==================== 确认相关 ====================
     
     def create_confirm(self, confirm: ConfirmBase) -> ConfirmBase:
         """创建确认"""
-        self._storage['confirm_base'][confirm.confirm_id] = confirm.dict()
+        self._storage['confirm_base'][confirm.confirm_id] = confirm.model_dump()
         return confirm
     
     # ==================== 资产相关 ====================
     
     def create_user_total_asset(self, asset: UserTotalAsset) -> UserTotalAsset:
         """创建用户总资产"""
-        self._storage['user_total_assets'][asset.asset_id] = asset.dict()
+        self._storage['user_total_assets'][asset.asset_id] = asset.model_dump()
         return asset
     
     def create_user_fund_asset(self, asset: UserFundAsset) -> UserFundAsset:
         """创建用户基金资产"""
-        self._storage['user_fund_assets'][asset.fund_asset_id] = asset.dict()
+        self._storage['user_fund_assets'][asset.fund_asset_id] = asset.model_dump()
         return asset
     
     def get_latest_user_total_asset(self, user_id: str) -> Optional[UserTotalAsset]:
@@ -248,4 +248,5 @@ class Repository:
         
         assets.sort(key=lambda x: x.calc_date, reverse=True)
         return assets[0]
+
 

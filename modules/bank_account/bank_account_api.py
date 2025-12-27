@@ -29,7 +29,7 @@ class BankAccountAPI:
     
     def create(self, request: BankAccountCreateRequest) -> BankAccountResponse:
         """创建银行账户"""
-        result = self._request("POST", "/api/v1/bank-account", json=request.dict())
+        result = self._request("POST", "/api/v1/bank-account", json=request.model_dump())
         return BankAccountResponse(**result)
     
     def get(self, id: str) -> BankAccountResponse:

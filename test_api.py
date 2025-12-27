@@ -2,6 +2,7 @@
 测试API功能
 """
 from fastapi.testclient import TestClient
+
 from main_v2 import app
 
 client = TestClient(app)
@@ -12,7 +13,7 @@ def test_root():
     assert response.status_code == 200
     data = response.json()
     assert data["service"] == "基金交易微服务"
-    print("✓ Root endpoint works")
+    print("[OK] Root endpoint works")
 
 def test_health():
     """测试健康检查"""
@@ -20,7 +21,7 @@ def test_health():
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
-    print("✓ Health check works")
+    print("[OK] Health check works")
 
 def test_create_user():
     """测试创建用户"""
@@ -35,7 +36,7 @@ def test_create_user():
     # 注意：需要认证token，这里先测试结构
     response = client.post("/api/v1/users", json=user_data)
     # 由于没有认证，可能会返回401，但至少可以测试路由是否注册
-    print(f"✓ User creation endpoint responds (status: {response.status_code})")
+    print(f"[OK] User creation endpoint responds (status: {response.status_code})")
 
 def test_get_user():
     """测试获取用户"""
@@ -53,7 +54,7 @@ def test_get_user():
     
     # 测试API（可能需要认证）
     response = client.get(f"/api/v1/users/{user.user_id}")
-    print(f"✓ User get endpoint responds (status: {response.status_code})")
+    print(f"[OK] User get endpoint responds (status: {response.status_code})")
 
 if __name__ == "__main__":
     print("=" * 50)
@@ -67,10 +68,11 @@ if __name__ == "__main__":
         test_get_user()
         
         print("\n" + "=" * 50)
-        print("✓ All API tests completed!")
+        print("[OK] All API tests completed!")
         print("=" * 50)
     except Exception as e:
-        print(f"\n✗ API test failed: {e}")
+        print(f"\n[ERROR] API test failed: {e}")
         import traceback
         traceback.print_exc()
+
 

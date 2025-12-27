@@ -97,3 +97,4 @@ def get_repository() -> BaseRepository:
         _repository_instance = BaseRepository()
     return _repository_instance
 
+

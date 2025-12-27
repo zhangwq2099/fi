@@ -452,3 +452,4 @@ class FundService:
         # 先计算最新资产
         return self.calculate_user_assets(user_id)
 
+

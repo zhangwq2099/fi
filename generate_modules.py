@@ -148,7 +148,7 @@ async def create_{module_name}(
     """创建{description}"""
     try:
         obj = app.create(request)
-        return {class_name}Response(**obj.dict())
+        return {class_name}Response(**obj.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -168,7 +168,7 @@ async def get_{module_name}(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"{description}不存在: {{id}}"
         )
-    return {class_name}Response(**obj.dict())
+    return {class_name}Response(**obj.model_dump())
 '''
 
 # API模板
@@ -203,7 +203,7 @@ class {class_name}API:
     
     def create(self, request: {class_name}CreateRequest) -> {class_name}Response:
         """创建{description}"""
-        result = self._request("POST", "/api/v1/{api_prefix}", json=request.dict())
+        result = self._request("POST", "/api/v1/{api_prefix}", json=request.model_dump())
         return {class_name}Response(**result)
     
     def get(self, id: str) -> {class_name}Response:
@@ -284,4 +284,5 @@ for module in modules:
 
 print("\n所有模块基础结构已生成！")
 print("请根据实际需求完善各模块的实现。")
+
 

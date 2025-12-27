@@ -37,3 +37,4 @@ class UserAssetAPI:
         result = self._request("GET", f"/api/v1/assets/{user_id}/balance")
         return UserBalance(**result)
 
+

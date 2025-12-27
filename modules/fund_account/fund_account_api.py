@@ -29,7 +29,7 @@ class FundAccountAPI:
     
     def create(self, request: FundAccountCreateRequest) -> FundAccountResponse:
         """创建基金账户"""
-        result = self._request("POST", "/api/v1/fund-account", json=request.dict())
+        result = self._request("POST", "/api/v1/fund-account", json=request.model_dump())
         return FundAccountResponse(**result)
     
     def get(self, id: str) -> FundAccountResponse:

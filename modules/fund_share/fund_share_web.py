@@ -23,7 +23,7 @@ async def create_fund_share(
     """创建基金份额"""
     try:
         obj = app.create(request)
-        return FundShareResponse(**obj.dict())
+        return FundShareResponse(**obj.model_dump())
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -43,4 +43,4 @@ async def get_fund_share(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"基金份额不存在: {id}"
         )
-    return FundShareResponse(**obj.dict())
+    return FundShareResponse(**obj.model_dump())

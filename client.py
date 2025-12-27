@@ -14,13 +14,14 @@ logger = logging.getLogger(__name__)
 class FundClient:
     """基金交易客户端"""
     
-    def __init__(self, base_url: str = "http://localhost:8000", token: str = "demo_token_2025"):
+    def __init__(self, base_url: str = "http://localhost:8000", token: str = "demo_token_2025", test_connection: bool = True):
         """
         初始化客户端
         
         Args:
             base_url: 微服务基础URL
             token: 认证令牌
+            test_connection: 是否在初始化时测试连接（默认True，测试时可设为False）
         """
         self.base_url = base_url.rstrip('/')
         self.token = token
@@ -29,8 +30,9 @@ class FundClient:
             "Content-Type": "application/json"
         }
         
-        # 测试连接
-        self._test_connection()
+        # 测试连接（可选）
+        if test_connection:
+            self._test_connection()
     
     def _test_connection(self):
         """测试服务连接"""
@@ -56,15 +58,23 @@ class FundClient:
                 **kwargs
             )
             
-            # 处理响应
-            if response.status_code == 200:
+            # 处理成功响应（200-299 都是成功状态码）
+            if 200 <= response.status_code < 300:
                 result = response.json()
-                if result.get('code') == 0:
-                    return result.get('data', {})
-                else:
-                    raise Exception(f"业务错误: {result.get('message')}")
+                # 检查是否是包装格式 {'code': 0, 'data': {...}}
+                if isinstance(result, dict) and 'code' in result:
+                    if result.get('code') == 0:
+                        return result.get('data', {})
+                    else:
+                        raise Exception(f"业务错误: {result.get('message', '未知错误')}")
+                # 否则直接返回结果（FastAPI 直接返回对象）
+                return result
             else:
-                error_detail = response.json().get('detail', '未知错误')
+                # 处理错误响应
+                try:
+                    error_detail = response.json().get('detail', '未知错误')
+                except:
+                    error_detail = response.text or '未知错误'
                 raise Exception(f"HTTP错误 {response.status_code}: {error_detail}")
                 
         except requests.exceptions.RequestException as e:
@@ -463,4 +473,5 @@ if __name__ == "__main__":
     
     # 演示交易流程
     app.demo_trading()
+
 

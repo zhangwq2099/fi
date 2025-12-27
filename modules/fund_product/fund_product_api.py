@@ -29,7 +29,7 @@ class FundProductAPI:
     
     def create(self, request: FundProductCreateRequest) -> FundProductResponse:
         """创建基金产品"""
-        result = self._request("POST", "/api/v1/fund-product", json=request.dict())
+        result = self._request("POST", "/api/v1/fund-product", json=request.model_dump())
         return FundProductResponse(**result)
     
     def get(self, id: str) -> FundProductResponse:

@@ -29,7 +29,7 @@ class CapitalSettlementAPI:
     
     def create(self, request: CapitalSettlementCreateRequest) -> CapitalSettlementResponse:
         """创建资金清算"""
-        result = self._request("POST", "/api/v1/capital-settlement", json=request.dict())
+        result = self._request("POST", "/api/v1/capital-settlement", json=request.model_dump())
         return CapitalSettlementResponse(**result)
     
     def get(self, id: str) -> CapitalSettlementResponse:

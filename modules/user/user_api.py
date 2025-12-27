@@ -55,7 +55,7 @@ class UserAPI:
         Returns:
             用户响应
         """
-        result = self._request("POST", "/api/v1/users", json=request.dict())
+        result = self._request("POST", "/api/v1/users", json=request.model_dump())
         return UserResponse(**result)
     
     def get_user(self, user_id: str) -> UserResponse:
@@ -80,4 +80,5 @@ class UserAPI:
         """
         result = self._request("GET", "/api/v1/users")
         return [UserResponse(**item) for item in result]
+
 

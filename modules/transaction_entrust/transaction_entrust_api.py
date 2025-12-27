@@ -29,7 +29,7 @@ class TransactionEntrustAPI:
     
     def create(self, request: TransactionEntrustCreateRequest) -> TransactionEntrustResponse:
         """创建交易委托"""
-        result = self._request("POST", "/api/v1/transaction-entrust", json=request.dict())
+        result = self._request("POST", "/api/v1/transaction-entrust", json=request.model_dump())
         return TransactionEntrustResponse(**result)
     
     def get(self, id: str) -> TransactionEntrustResponse:

@@ -164,7 +164,7 @@ async def get_user(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"用户不存在: {user_id}"
             )
-        return ResponseModel(data=user.dict())
+        return ResponseModel(data=user.model_dump())
     except HTTPException:
         raise
     except Exception as e:
@@ -267,7 +267,7 @@ async def get_products(
         products = fund_service.list_fund_products(product_type)
         result = []
         for product in products:
-            product_data = product.dict()
+            product_data = product.model_dump()
             # 获取最新净值
             nav = fund_service.get_latest_nav(product.product_id)
             if nav:
@@ -343,4 +343,5 @@ if __name__ == "__main__":
         reload=True,
         log_level="info"
     )
+
 
